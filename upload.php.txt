@@ -1,0 +1,15 @@
+<?php
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['file'])) {
+    $targetDir = './Uploaded Files/';
+    $targetFile = $targetDir . basename($_FILES['file']['name']);
+
+    // Move the uploaded file to the target directory
+    if (move_uploaded_file($_FILES['file']['tmp_name'], $targetFile)) {
+        $response = array('message' => 'File uploaded successfully.');
+        echo json_encode($response);
+    } else {
+        $response = array('message' => 'Error uploading file.');
+        echo json_encode($response);
+    }
+}
+?>
